@@ -94,7 +94,7 @@ class APIMovie(ApiConnect):
         res2 = conn2.getresponse()  # Objeto de tipo HTTPResponse
         data2 = res2.read()  # Convertimos a texto el objeto anterior, ahora es de tipo "bytes"
         if res2.status != 200:  # Se comprueba si el status es correcto, si no, manda un error
-            return "ERROR IN API CONNECTION", res2.status
+            return "ERROR IN API CONNECTION"
         else:
             movies_list = []  # Lista para guardar datos obtenidos de la pelicula
             # Ahora convertimos a json el objeto de tipo "bytes"
@@ -219,7 +219,7 @@ class APIMovie(ApiConnect):
 
 
 if __name__ == "__main__":
-    pass 
-
+    pass
+    
 
  

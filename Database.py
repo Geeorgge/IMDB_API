@@ -41,7 +41,7 @@ class DataBase(DataBaseMovies):
             self.conexion.close()
 
 
-    def saveMovie(self, movie): #movie: Movie
+    def saveMovie(self, movie: Movie): #movie: Movie
         # Se crea el cursor para manejar consultas
         self.cursor = self.conexion.cursor()
         #Consulta para ver si existen datos 
@@ -66,6 +66,7 @@ class DataBase(DataBaseMovies):
         else:
 
             self.cursor.execute("DELETE FROM movies WHERE id_imdb = ?", (id_movie,)) #Borramos pelicula mediante el id
+            
             self.conexion.commit()
 
         return "Pelicula borrada :O"
@@ -101,7 +102,7 @@ class DataBase(DataBaseMovies):
         self.cursor.execute("SELECT * FROM movies WHERE title = ?", (movie,))
         data = self.cursor.fetchone() #tomamos solo la pelicula solicitada con "fetchone"
         #movies_saved = []
-        if data == None or data == "":
+        if data == None or data == "" or movie not in data:
             return "No existe ésta pelicula en la DB"
         else:
             print("Pelicula encontrada: ")
