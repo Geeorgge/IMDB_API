@@ -1,0 +1,13 @@
+language: python
+os: windows
+
+jobs:
+  include:
+     
+    - name: "Python 3.9.2 on Windows"
+      python: 3.9.5
+      language: shell       # 'language: python' is an error on Travis CI Windows
+
+script: 
+- python testApi.py
+- python testDataBase.py
