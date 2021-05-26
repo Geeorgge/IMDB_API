@@ -3,7 +3,7 @@ from DB_Interface import DataBaseMovies
 from Movie import Movie
 
 
-#CLASE PARA CREAR LA BASE DE DATOS
+ 
 
 #implementa de la interface "DataBaseMovies"
  

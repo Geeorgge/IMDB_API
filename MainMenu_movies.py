@@ -6,7 +6,7 @@ from Movie import Movie
 class MenuOpciones():
 
     def search_movie(self, name:str): # ----> Busca una película y pregunta si quiere guardar
-        #movie_new = APIMovie().getMovie(name)
+        
         movie_titles = APIMovie().get_movie_titles(name)
         if movie_titles == "Sin resultados":
             print("No existe esta pelicula en la API DB\n")
@@ -29,42 +29,25 @@ class MenuOpciones():
                     
                 elif op == 2:
                     n = True
-                    #print("Al menu")
+                    
                 else:
                     print("Elige una opcion del menu")
 
     def save_movie(self, nombre: Movie): # ----> Busca una película
     
         movie_new = APIMovie().getMovie(nombre)
-        #if movie_new == None:
-        #print("No existe")
-        #else:
-        DataBase().saveMovie(movie_new) #Guardar en la base de datos
-        #print("¡¡¡Película guardada!!!")
+        
+        DataBase().saveMovie(movie_new) 
            
 
     def show_all_movies(self): # ----> Muestra todas las películas guardadas en la BDD
          
         moviesList = DataBase().showAllMovies()
-        #if moviesList == "" or moviesList == None:
-        #    print("Aún no hay datos guardados")
-        #else:
-        #print("Películas guardadas: \n")
-        #for item in moviesList:
-        #    print(item)
-        #    print("\n")
         print( moviesList)
     
     def show_a_movie(self, name:str):  # ----> Muestra una película que esta guardada en la BDD
         
         moviesList = DataBase().showMovie(name)
-        #if  moviesList == "" or moviesList == None: #if name Not in movielist
-        #    print("No existe esta película en la base de datos :(\n")
-        #else:
-            #print("Película encontrada: \n")
-        #for item in moviesList:
-        #    print(item)
-        #    print("\n")
         print(moviesList)
 
     def delete_movie(self, name):  # ----> Borra una película que esta guardada en la BDD by ID
@@ -112,4 +95,4 @@ if __name__ == "__main__":
     main()
     
 
- # 24 DE MAYO DEL 2021  22:36 PM
+ 

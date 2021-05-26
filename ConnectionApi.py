@@ -44,7 +44,6 @@ class APIMovie(ApiConnect):
                 return "Sin resultados"
             else:
                 for movie in range(len(new_data_json1["movie_results"])):
-                    #new_data_json1["movie_results"][movie]["imdb_id"] != "" and new_data_json1["movie_results"][movie]["imdb_id"]
                     if new_data_json1["movie_results"][movie]["imdb_id"] not in movies_list:
                         self.id_imdb = new_data_json1["movie_results"][movie]["imdb_id"]
                         if self.id_imdb == None or self.id_imdb == "":
@@ -74,13 +73,11 @@ class APIMovie(ApiConnect):
             else:
                 return movies_list
 
-        #return movies_list
+        
 
-
-    # (, id_movie: str) Quitar parametro del id para ingresarlo internamente
-    def searchMovieDetails(self, idds=""):  # id_movie: str
-        # id_imdb = self.searchMovieTitle()  Como obtengo el id?
-        #id_imdb = ""
+    
+    def searchMovieDetails(self, idds=""): 
+        
         conn2 = http.client.HTTPSConnection(
             "movies-tvshows-data-imdb.p.rapidapi.com")
 
@@ -92,7 +89,7 @@ class APIMovie(ApiConnect):
         self.id_imdb = idds 
         # SEGUNDO REQUEST
         conn2.request("GET", "/?type=get-movie-details&imdb="+urllib.parse.quote(idds),
-                      headers=headers2)  # self.id_imdb  urllib.parse.quote(ids)
+                      headers=headers2) 
 
         res2 = conn2.getresponse()  # Objeto de tipo HTTPResponse
         data2 = res2.read()  # Convertimos a texto el objeto anterior, ahora es de tipo "bytes"
@@ -135,7 +132,7 @@ class APIMovie(ApiConnect):
         
             return movies_list
 
-    def searchMovieImage(self, idds=""):  # , id_movie: str
+    def searchMovieImage(self, idds=""): 
         conn3 = http.client.HTTPSConnection(
             "movies-tvshows-data-imdb.p.rapidapi.com")
         
@@ -151,7 +148,7 @@ class APIMovie(ApiConnect):
         self.id_imdb  =   idds 
         
         conn3.request(
-            "GET", "/?type=get-movies-images-by-imdb&imdb="+urllib.parse.quote(idds), headers=headers3)  # self.id_imdb +self.id_imdb
+            "GET", "/?type=get-movies-images-by-imdb&imdb="+urllib.parse.quote(idds), headers=headers3) 
         res3 = conn3.getresponse()  # Objeto de tipo HTTPResponse
         # .decode("utf-8")  # Convertimos a texto el objeto anterior, ahora es de tipo "bytes"
         data3 = res3.read()
@@ -212,34 +209,17 @@ class APIMovie(ApiConnect):
     def getMovie(self, nombre: str):  # , id_movie:str
         id_title_year = self.searchMovieTitle(nombre)
         idd = id_title_year[0]
-        # self.id_imdbSe accede al id de la pelicula
         details_movie = self.searchMovieDetails(idd)
-        #details_movie = self.searchMovieDetails(id_title_year[0])
-        # Mediante la variable "id_imdb" que la almacena
-        #image_movie = self.searchMovieImage(id_title_year[0])  # self.id_imdb
         image_movie = self.searchMovieImage(idd) 
-        #new_object_movie = Movie(*id_title_year, *details_movie, *image_movie)
         new_object_movie = Movie(id_title_year[0], id_title_year[1], id_title_year[2],
                                  details_movie[0], details_movie[1], details_movie[2], details_movie[3],
                                  image_movie[0])
-        #print(new_object_movie)
-        return new_object_movie   # Objeto de tipo "Movies"
+    
+        return new_object_movie 
 
 
 if __name__ == "__main__":
-    a = APIMovie()
-    nombre = "Hereditary"  # "
-    #nombre = " "
-    # id_movie  = input("Ingresa el ID de la pelicula: ")  #tt7784604
-    b = a.searchMovieTitle(nombre)
-    #b = a.get_movie_titles(nombre)
-    #b = a.searchMovieDetails("tt853580") #Midsommar directors cut tt12635794
-    #b = a.searchMovieImage("tt1201607")
-    #print(c)
-    #nuevo = a.createMovieObject(b, c, d)
-    #final = a.getMovie(nombre)
-    #print(final)
-    print(b)
-    
+    pass 
+
 
  
